@@ -48,21 +48,40 @@
   //     }
   //   });
   // }
-  function loadStudents(className) {
+//   function loadStudents(className) {
+//   $.ajax({
+//     type: "GET",
+//     url: `http://localhost:3000/getStudents?class=${className}`,
+//     success: function (response) {
+//       console.log(response);
+//       if (Array.isArray(response)) {
+//         $("#studentList").html(response.map(student => `<li class='sortable-item' data-student='${student.name_of_student}' data-sort-rank='${student.sort_rank}'>${student.name_of_student}</li>`).join(''));
+//       } else {
+//         console.error("Invalid response format:", response);
+//       }
+//     },
+//     error: function (error) {
+//       console.error("Error loading students:", error);
+//     }
+//   });
+// }
+
+function loadStudents(className) {
   $.ajax({
     type: "GET",
     url: `http://localhost:3000/getStudents?class=${className}`,
     success: function (response) {
-      console.log(response);
-      if (Array.isArray(response)) {
-        $("#studentList").html(response.map(student => `<li class='sortable-item' data-student='${student.name_of_student}' data-sort-rank='${student.sort_rank}'>${student.name_of_student}</li>`).join(''));
-      } else {
-        console.error("Invalid response format:", response);
-      }
+      console.log(response); // Log the response for debugging
+      $("#studentList").html(
+        response.map(
+          (student) =>
+            `<li class='sortable-item' data-student='${student.name_of_student}' data-sort-rank='${student.sort_rank}'>${student.name_of_student}</li>`
+        ).join('')
+      );
     },
     error: function (error) {
       console.error("Error loading students:", error);
-    }
+    },
   });
 }
   $(function () {
