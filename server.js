@@ -1,8 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+const cors = require('cors');
+
 const app = express();
 const port = 3000;
+
+// Enable CORS for all routes
+app.use(cors());
+
 
 // Replace these values with your MySQL credentials
 const dbConfig = {
