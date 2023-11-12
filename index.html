@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class A Students</title>
+  <title>Class Students</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <style>
@@ -23,21 +23,35 @@
 </head>
 <body>
 
-  <div class="container mt-5">
-    <h2 id="classTitle">Class A Students</h2>
-    <button class="btn btn-primary" onclick="loadStudents('Class A')">Class A</button>
-    <button class="btn btn-primary" onclick="loadStudents('Class B')">Class B</button>
-    <ul id="studentList" class="sortable-list">
-      <!-- Students will be dynamically loaded here -->
-    </ul>
-  </div>
+<div class="container mt-5">
+  <h2 id="classTitle">Class A Students</h2>
+  <button class="btn btn-primary" onclick="loadStudents('Class A')">Class A</button>
+  <button class="btn btn-primary" onclick="loadStudents('Class B')">Class B</button>
+  <ul id="studentList" class="sortable-list">
+    <!-- Students will be dynamically loaded here -->
+  </ul>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-  $(function() {
+  function loadStudents(className) {
+    $.ajax({
+      type: "GET",
+      url: `http://localhost:3000/getStudents?class=${className}`,
+      success: function (response) {
+        console.log(response);
+        $("#studentList").html(response.map(student => `<li class='sortable-item' data-student='${student.name_of_student}' data-sort-rank='${student.sort_rank}'>${student.name_of_student}</li>`).join(''));
+      },
+      error: function (error) {
+        console.error("Error loading students:", error);
+      }
+    });
+  }
+
+  $(function () {
     $("#studentList").sortable({
-      update: function(event, ui) {
+      update: function (event, ui) {
         updateSortOrder();
       }
     });
@@ -50,24 +64,11 @@
         url: "http://localhost:3000/updateSortOrder",
         contentType: "application/json",
         data: JSON.stringify({ sortOrder: updatedOrder }),
-        success: function(response) {
+        success: function (response) {
           console.log(response);
         },
-        error: function(error) {
+        error: function (error) {
           console.error("Error updating sort order:", error);
-        }
-      });
-    }
-
-    function loadStudents(className) {
-      $.ajax({
-        type: "GET",
-        url: `http://localhost:3000/getStudents?class=${className}`,
-        success: function(response) {
-          $("#studentList").html(response.map(student => `<li class='sortable-item' data-student='${student.name_of_student}' data-sort-rank='${student.sort_rank}'>${student.name_of_student}</li>`).join(''));
-        },
-        error: function(error) {
-          console.error("Error loading students:", error);
         }
       });
     }
