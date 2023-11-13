@@ -41,7 +41,7 @@ function loadStudents(className) {
 
   $.ajax({
     type: "GET",
-    url: `http://localhost:3000/getStudents?class=${className}`,
+    url: `https://task1studentrank.onrender.com/getStudents?class=${className}`,
     success: function (response) {
       console.log(response); // Log the response for debugging
       $("#studentList").html(
@@ -70,7 +70,7 @@ $(function () {
 
     $.ajax({
       type: "POST",
-      url: "http://localhost:3000/updateSortOrder",
+      url: "https://task1studentrank.onrender.com/updateSortOrder",
       contentType: "application/json",
       data: JSON.stringify({ sortOrder: updatedOrder, className: className }), // Pass the class to the server
       success: function (response) {
