@@ -15,7 +15,6 @@ This is a web application that allows teachers to manage and sort their students
 - Node.js, Express.js (Server-side)
 - MySQL (Database)
 
-![Output Screenshot 1](./output/Screenshot1.png)
 ![Output Screenshot 3](./output/Screenshot2.png)
 ![Output Screenshot 2](./output/Screenshot3.png)
 ![Output Screenshot 3](./output/Screenshot4.png)
