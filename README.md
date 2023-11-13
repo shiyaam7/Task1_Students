@@ -19,10 +19,8 @@ Check out the live demo: [Task1_StudentsRank](https://task1studentsranksort.netl
 - Node.js, Express.js (Server-side)
 - MySQL (Database)
 
-![Output Screenshot 3](./output/Screenshot2.png)
-![Output Screenshot 2](./output/Screenshot3.png)
-![Output Screenshot 3](./output/Screenshot4.png)
-![Output Screenshot 3](./output/Screenshot5.png)
+![Output Screenshot 1](./output/Screenshot1.png)
+![Output Screenshot 2](./output/Screenshot2.png)
 
 
 
