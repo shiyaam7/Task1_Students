@@ -9,7 +9,6 @@ const port = 3000;
 // Enable CORS for all routes
 app.use(cors());
 
-
 // Replace these values with your MySQL credentials
 const dbConfig = {
   host: 'localhost',
@@ -47,10 +46,11 @@ app.get('/getStudents', (req, res) => {
 
 app.post('/updateSortOrder', (req, res) => {
   const updatedOrder = req.body.sortOrder;
+  const className = req.body.className || 'Class A';
 
   updatedOrder.forEach((student, index) => {
     const query = 'UPDATE students SET sort_rank = ? WHERE class = ? AND name_of_student = ?';
-    connection.query(query, [index + 1, 'Class A', student], (err) => {
+    connection.query(query, [index + 1, className, student], (err) => {
       if (err) {
         console.error('Error updating MySQL record:', err);
         res.status(500).send('Internal Server Error');
